@@ -14,4 +14,8 @@
     <string name="description_user_story">description_user_story</string>
     <string name="stories">stories</string>
     <string name="watch_all">watch_all</string>
+    <string name="visited">Visited</string>
+    <string name="todo">TODO</string>
+    <string name="done">Done</string>
+    <string name="account">Account</string>
 </resources>

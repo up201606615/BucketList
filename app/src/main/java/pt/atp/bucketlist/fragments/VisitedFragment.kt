@@ -1,4 +1,17 @@
 package pt.atp.bucketlist.fragments
 
-class VisitedFragment {
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import pt.atp.bucketlist.R
+
+class VisitedFragment: Fragment(R.layout.fragment_visited)  {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView: View = inflater.inflate(R.layout.fragment_visited,container,false)
+        return rootView
+    }
+
 }

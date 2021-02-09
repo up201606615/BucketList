@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home"
-        android:title="@string/home" />
+        android:icon="@drawable/ic_explore"
+        android:title="@string/todo" />
 
     <item
         android:id="@+id/nav_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/search" />
+        android:icon="@drawable/ic_cheked"
+        android:title="@string/done" />
 
     <item
         android:id="@+id/nav_more"
@@ -23,5 +23,5 @@
     <item
         android:id="@+id/nav_person"
         android:icon="@drawable/ic_person"
-        android:title="@string/personal" />
+        android:title="@string/account" />
 </menu>
