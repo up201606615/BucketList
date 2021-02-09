@@ -8,4 +8,10 @@
     <string name="camera">Camera</string>
     <string name="live">Live</string>
     <string name="chat">Chat</string>
+    <string name="description_user_profile">description_user_profile</string>
+    <string name="description_feed_actions">description_feed_actions</string>
+    <string name="description_feed_photo">description_feed_photo</string>
+    <string name="description_user_story">description_user_story</string>
+    <string name="stories">stories</string>
+    <string name="watch_all">watch_all</string>
 </resources>
