@@ -1,5 +1,6 @@
 package pt.atp.bucketlist.model
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +8,10 @@ import android.os.Build
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_story.view.*
-import pt.atp.bucketlist.MainActivity
 import pt.atp.bucketlist.R
 
 
-class StoryAdapter internal constructor(private val places: List<Place>) : RecyclerView.Adapter<StoryAdapter.MainViewHolder?>() {
+class StoryAdapter internal constructor(private val context: Context, private val places: List<Place>) : RecyclerView.Adapter<StoryAdapter.MainViewHolder?>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,15 +26,13 @@ class StoryAdapter internal constructor(private val places: List<Place>) : Recyc
         val feed = places[position]
         holder.userName.text = feed.country.split(" ")[0]
 
-        holder.userImage.setImageResource(R.drawable.amsterdam)
-        /*Picasso.with(MainActivity())
+        Picasso.with(context)
             .load(feed.picture)
             .error(R.drawable.error)
-            .into(holder.userImage)*/
+            .into(holder.userImage)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.userImage.clipToOutline = true
         }
-
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

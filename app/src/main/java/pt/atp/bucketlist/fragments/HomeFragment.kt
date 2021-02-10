@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import pt.atp.bucketlist.Places
-import pt.atp.bucketlist.Places.placesToVisit
 import pt.atp.bucketlist.R
 import pt.atp.bucketlist.model.FeedAdapter
 import pt.atp.bucketlist.model.Place
@@ -25,7 +22,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         val rootView: View = inflater.inflate(R.layout.fragment_home,container,false)
         val stories: RecyclerView = rootView.findViewById(R.id.rv_stories)
         val feed: RecyclerView = rootView.findViewById(R.id.rv_feed)
-        var listTotal: ArrayList<Place> = ArrayList()
+        val listTotal: ArrayList<Place> = ArrayList()
 
         db.collection("PlaceToVisit").get()
             .addOnSuccessListener { result ->
@@ -34,18 +31,19 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                         document["country"].toString(),
                         document["place"].toString(),
                         document["description"].toString(),
-                        R.drawable.amsterdam)
+                        document["imageUrl"].toString()
+                    )
                     )
                 }
                 stories.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = StoryAdapter(listTotal)
+                    adapter = StoryAdapter(context, listTotal)
                 }
                 feed.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context)
-                    adapter = FeedAdapter(listTotal)
+                    adapter = FeedAdapter(context, listTotal)
                 }
             }
             .addOnFailureListener {
