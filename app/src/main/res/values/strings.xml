@@ -18,4 +18,10 @@
     <string name="todo">TODO</string>
     <string name="done">Done</string>
     <string name="account">Account</string>
+    <string name="add_to_places_to_visit">Add to places to visit</string>
+    <string name="add_to_places_visited">Add to places visited</string>
+    <string name="logo">logo</string>
+    <string name="choose_image">Choose image</string>
+    <string name="upload_image">Upload image</string>
+    <string name="description">Description</string>
 </resources>
