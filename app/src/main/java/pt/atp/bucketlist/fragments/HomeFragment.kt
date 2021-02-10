@@ -35,11 +35,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                     )
                     )
                 }
-                stories.apply {
-                    setHasFixedSize(true)
-                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = StoryAdapter(context, listTotal)
-                }
                 feed.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context)
@@ -51,13 +46,25 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             }
 
         val countryList: ArrayList<String> = ArrayList()
+        val storiesList: ArrayList<Place> = ArrayList()
         db.collection("PlaceToVisit").document("countryList").collection("list").get()
             .addOnSuccessListener { result ->
                 for (document in result){
                     countryList.add(document["country"].toString())
+                    storiesList.add(Place(
+                        document["country"].toString(),
+                        document["place"].toString(),
+                        document["description"].toString(),
+                        document["imageUrl"].toString()
+                    ))
                 }
                 //Toast.makeText(context,countryList.toString(),Toast.LENGTH_LONG).show()
                 formCountryList(countryList)
+                stories.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = StoryAdapter(context, storiesList)
+                }
 
             }
             .addOnFailureListener {
