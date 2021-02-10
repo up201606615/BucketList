@@ -22,9 +22,7 @@ class FeedAdapter internal constructor(private val context: Context, private val
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val feed = places[position]
-        holder.userImage.setImageResource(R.drawable.amsterdam)
         holder.userName.text = feed.place
-        holder.image.setImageResource(R.drawable.amsterdam)
         Picasso.with(context)
             .load(feed.picture)
             .error(R.drawable.error)
