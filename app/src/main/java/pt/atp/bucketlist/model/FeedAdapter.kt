@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_feed.view.*
+import pt.atp.bucketlist.MainActivity
 import pt.atp.bucketlist.R
 
 class FeedAdapter internal constructor(private val places: List<Place>) : RecyclerView.Adapter<FeedAdapter.MainViewHolder?>() {
@@ -20,9 +22,17 @@ class FeedAdapter internal constructor(private val places: List<Place>) : Recycl
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val feed = places[position]
-        holder.userImage.setImageResource(feed.picture)
-        holder.userName.text = feed.name
-        holder.image.setImageResource(feed.picture)
+        holder.userImage.setImageResource(R.drawable.amsterdam)
+        holder.userName.text = feed.place
+        holder.image.setImageResource(R.drawable.amsterdam)
+        /*Picasso.with(MainActivity())
+            .load(feed.picture)
+            .error(R.drawable.error)
+            .into(holder.image)
+        Picasso.with(MainActivity())
+            .load(feed.picture)
+            .error(R.drawable.error)
+            .into(holder.userImage)*/
 
     }
 

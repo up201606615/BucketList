@@ -5,16 +5,16 @@ import pt.atp.bucketlist.model.Place
 object Places {
 
     val placesToVisit = listOf(
-        Place("Ireland", R.drawable.ireland),
-        Place("Scotland - North Coast 500", R.drawable.scotland),
-        Place("Patagonia", R.drawable.patagonia),
-        Place("Norway", R.drawable.norway),
+        Place("Ireland", "ireland","test" ,R.drawable.ireland),
+        //Place("Scotland - North Coast 500", "ireland","test" , R.drawable.scotland),
+        //Place("Patagonia", "ireland","test" , R.drawable.patagonia),
+        //Place("Norway", "ireland","test" , R.drawable.norway),
     )
 
     val placesVisited = listOf(
-        Place("Italy - Venice", R.drawable.venice),
-        Place("Poland - Wroclaw", R.drawable.wroclaw),
-        Place("Poland - Auschwitz", R.drawable.auschwitz),
+        Place("Italy - Venice", "ireland","test" , R.drawable.venice),
+        Place("Poland - Wroclaw", "ireland","test" , R.drawable.wroclaw),
+        Place("Poland - Auschwitz", "ireland","test" , R.drawable.auschwitz),/*
         Place("Poland - Zakopane", R.drawable.zakopane),
         Place("Germany - Berlin", R.drawable.berlin),
         Place("Austria - Salzburg", R.drawable.salzburg),
@@ -38,7 +38,7 @@ object Places {
         Place("USA - Route 66", R.drawable.usa),
         Place("Switzerland", R.drawable.switzerland),
         Place("France - Paris", R.drawable.paris),
-        Place("UK - London", R.drawable.london),
+        Place("UK - London", R.drawable.london),*/
     )
 
 }

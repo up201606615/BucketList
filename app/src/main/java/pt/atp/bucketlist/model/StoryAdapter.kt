@@ -5,8 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.os.Build
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_story.view.*
+import pt.atp.bucketlist.MainActivity
 import pt.atp.bucketlist.R
+
 
 class StoryAdapter internal constructor(private val places: List<Place>) : RecyclerView.Adapter<StoryAdapter.MainViewHolder?>() {
 
@@ -21,12 +24,17 @@ class StoryAdapter internal constructor(private val places: List<Place>) : Recyc
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val feed = places[position]
-        holder.userName.text = feed.name.split(" ")[0]
+        holder.userName.text = feed.country.split(" ")[0]
 
-        holder.userImage.setImageResource(feed.picture)
+        holder.userImage.setImageResource(R.drawable.amsterdam)
+        /*Picasso.with(MainActivity())
+            .load(feed.picture)
+            .error(R.drawable.error)
+            .into(holder.userImage)*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.userImage.clipToOutline = true
         }
+
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

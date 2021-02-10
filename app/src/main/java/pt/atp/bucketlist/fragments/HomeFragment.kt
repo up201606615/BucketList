@@ -4,32 +4,53 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import pt.atp.bucketlist.model.FeedAdapter
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import pt.atp.bucketlist.Places
+import pt.atp.bucketlist.Places.placesToVisit
 import pt.atp.bucketlist.R
+import pt.atp.bucketlist.model.FeedAdapter
+import pt.atp.bucketlist.model.Place
 import pt.atp.bucketlist.model.StoryAdapter
 
 class HomeFragment: Fragment(R.layout.fragment_home) {
+
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val rootView: View = inflater.inflate(R.layout.fragment_home,container,false)
         val stories: RecyclerView = rootView.findViewById(R.id.rv_stories)
         val feed: RecyclerView = rootView.findViewById(R.id.rv_feed)
+        var listTotal: ArrayList<Place> = ArrayList()
 
-        stories.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = StoryAdapter(Places.placesToVisit)
-        }
-
-        feed.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = FeedAdapter(Places.placesToVisit)
-        }
+        db.collection("PlaceToVisit").get()
+            .addOnSuccessListener { result ->
+                for(document in result){
+                    listTotal.add(Place(
+                        document["country"].toString(),
+                        document["place"].toString(),
+                        document["description"].toString(),
+                        R.drawable.amsterdam)
+                    )
+                }
+                stories.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = StoryAdapter(listTotal)
+                }
+                feed.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = FeedAdapter(listTotal)
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"Error getting data", Toast.LENGTH_LONG).show()
+            }
 
         return rootView
     }
