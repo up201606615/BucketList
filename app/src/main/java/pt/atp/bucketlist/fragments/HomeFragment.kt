@@ -50,6 +50,42 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 Toast.makeText(context,"Error getting data", Toast.LENGTH_LONG).show()
             }
 
+        val countryList: ArrayList<String> = ArrayList()
+        db.collection("PlaceToVisit").document("countryList").collection("list").get()
+            .addOnSuccessListener { result ->
+                for (document in result){
+                    countryList.add(document["country"].toString())
+                }
+                //Toast.makeText(context,countryList.toString(),Toast.LENGTH_LONG).show()
+                formCountryList(countryList)
+
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"Error getting country list",Toast.LENGTH_LONG).show()
+            }
+
         return rootView
+    }
+
+    private fun formCountryList(countryList: ArrayList<String>) {
+        val storiesList: ArrayList<ArrayList<Place>> = ArrayList()
+        val aux: ArrayList<Place> = ArrayList()
+        for((i, country) in countryList.withIndex()){
+            db.collection("PlaceToVisit").document("stories").collection(country).get()
+                .addOnSuccessListener { result ->
+                    for (document in result){
+                        aux.add(Place(
+                            document["country"].toString(),
+                            document["place"].toString(),
+                            document["description"].toString(),
+                            document["imageUrl"].toString()
+                        ))
+                    }
+                    storiesList.add(aux)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context,"Error forming country list",Toast.LENGTH_LONG).show()
+                }
+        }
     }
 }
