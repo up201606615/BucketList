@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -29,11 +30,13 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
     private var storageReference: StorageReference? = null
-    var buttonChooseImage: Button? = null
-    var buttonUploadImage: Button? = null
-    var buttonAddPlacesToVisit: Button? = null
-    var buttonAddPlacesVisited: Button? = null
-    var descriptionText: EditText? = null
+    private var buttonChooseImage: FloatingActionButton? = null
+    private var buttonUploadImage: FloatingActionButton? = null
+    private var buttonAddPlacesToVisit: Button? = null
+    private var buttonAddPlacesVisited: Button? = null
+    private var descriptionText: EditText? = null
+    private var countryText: EditText? = null
+    private var placeText: EditText? = null
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_add,container,false)
@@ -42,6 +45,8 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         buttonAddPlacesToVisit = rootView.findViewById(R.id.buttonAddPlacesToVisit)
         buttonAddPlacesVisited = rootView.findViewById(R.id.buttonAddPlacesVisited)
         descriptionText = rootView.findViewById(R.id.descriptionText)
+        countryText = rootView.findViewById(R.id.countryText)
+        placeText = rootView.findViewById(R.id.placeText)
 
         storageReference = FirebaseStorage.getInstance().reference
 
@@ -96,21 +101,18 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         val db = FirebaseFirestore.getInstance()
         val data = hashMapOf(
             "imageUrl" to uri,
+            "country" to countryText?.text.toString(),
+            "place" to placeText?.text.toString(),
             "description" to descriptionText?.text.toString()
         )
-        //data["imageUrl"] = uri
-        if (descriptionText?.text!=null){
-            db.collection(list)
-                .add(data)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Saved to DB", Toast.LENGTH_LONG).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, "Error saving to DB", Toast.LENGTH_LONG).show()
-                }
-        } else{
-            Toast.makeText(context,"Write the description", Toast.LENGTH_LONG).show()
-        }
+        db.collection(list)
+            .add(data)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Saved to DB", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Error saving to DB", Toast.LENGTH_LONG).show()
+            }
 
     }
 
