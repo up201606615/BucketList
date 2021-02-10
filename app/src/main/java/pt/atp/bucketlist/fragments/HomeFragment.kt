@@ -16,6 +16,12 @@ import pt.atp.bucketlist.model.StoryAdapter
 
 class HomeFragment: Fragment(R.layout.fragment_home) {
 
+    private var listener = object : StoryAdapter.OnItemClickListener{
+        override fun onItemClick(story: Place) {
+            Toast.makeText(context,"Clicked",Toast.LENGTH_LONG).show()
+        }
+    }
+
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -63,7 +69,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 stories.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = StoryAdapter(context, storiesList)
+                    adapter = StoryAdapter(context, storiesList, listener)
                 }
 
             }
@@ -95,4 +101,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 }
         }
     }
+
+
 }

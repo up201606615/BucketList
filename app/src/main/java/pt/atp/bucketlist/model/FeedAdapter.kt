@@ -31,6 +31,7 @@ class FeedAdapter internal constructor(private val context: Context, private val
             .load(feed.picture)
             .error(R.drawable.error)
             .into(holder.userImage)
+
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
