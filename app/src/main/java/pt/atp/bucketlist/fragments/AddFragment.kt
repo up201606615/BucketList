@@ -117,7 +117,22 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             .addOnFailureListener {
                 Toast.makeText(context, "Error saving to DB", Toast.LENGTH_LONG).show()
             }
-
+        val dataCountry = hashMapOf(
+            "imageUrl" to uri,
+            "place" to placeText?.text.toString(),
+            "description" to descriptionText?.text.toString()
+        )
+        db.collection(list).document("stories").collection(countryText?.text.toString())
+            .add(dataCountry)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Saved to DB", Toast.LENGTH_LONG).show()
+                activity?.finish()
+                val intent = Intent(context,MainActivity::class.java)
+                startActivity(intent)
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Error saving to DB", Toast.LENGTH_LONG).show()
+            }
     }
 
     private fun launchGallery() {
