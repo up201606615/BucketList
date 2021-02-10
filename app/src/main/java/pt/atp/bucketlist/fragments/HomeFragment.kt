@@ -18,7 +18,8 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private var listener = object : StoryAdapter.OnItemClickListener{
         override fun onItemClick(story: Place) {
-            Toast.makeText(context,"Clicked",Toast.LENGTH_LONG).show()
+            //Toast.makeText(context,story.country,Toast.LENGTH_LONG).show()
+            formCountryList(story.country)
         }
     }
 
@@ -64,8 +65,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                         document["imageUrl"].toString()
                     ))
                 }
-                //Toast.makeText(context,countryList.toString(),Toast.LENGTH_LONG).show()
-                formCountryList(countryList)
                 stories.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -80,26 +79,24 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         return rootView
     }
 
-    private fun formCountryList(countryList: ArrayList<String>) {
-        val storiesList: ArrayList<ArrayList<Place>> = ArrayList()
-        val aux: ArrayList<Place> = ArrayList()
-        for((i, country) in countryList.withIndex()){
-            db.collection("PlaceToVisit").document("stories").collection(country).get()
-                .addOnSuccessListener { result ->
-                    for (document in result){
-                        aux.add(Place(
-                            document["country"].toString(),
-                            document["place"].toString(),
-                            document["description"].toString(),
-                            document["imageUrl"].toString()
-                        ))
-                    }
-                    storiesList.add(aux)
+    private fun formCountryList(country: String) {
+        val list: ArrayList<Place> = ArrayList()
+        db.collection("PlaceToVisit").document("stories").collection(country).get()
+            .addOnSuccessListener { result ->
+                for (document in result){
+                    list.add(Place(
+                        document["country"].toString(),
+                        document["place"].toString(),
+                        document["description"].toString(),
+                        document["imageUrl"].toString()
+                    ))
                 }
-                .addOnFailureListener {
-                    Toast.makeText(context,"Error forming country list",Toast.LENGTH_LONG).show()
-                }
-        }
+                Toast.makeText(context, list.toString(), Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"Error forming country list",Toast.LENGTH_LONG).show()
+            }
+
     }
 
 
