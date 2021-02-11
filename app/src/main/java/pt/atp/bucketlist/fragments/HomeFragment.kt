@@ -18,7 +18,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private var listener = object : StoryAdapter.OnItemClickListener{
         override fun onItemClick(story: Place) {
-            //Toast.makeText(context,story.country,Toast.LENGTH_LONG).show()
             formCountryList(story.country)
         }
     }
@@ -29,23 +28,22 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         val rootView: View = inflater.inflate(R.layout.fragment_home,container,false)
         val stories: RecyclerView = rootView.findViewById(R.id.rv_stories)
         val feed: RecyclerView = rootView.findViewById(R.id.rv_feed)
-        val listTotal: ArrayList<Place> = ArrayList()
+        val feedList: ArrayList<Place> = ArrayList()
 
         db.collection("PlaceToVisit").get()
             .addOnSuccessListener { result ->
                 for(document in result){
-                    listTotal.add(Place(
+                    feedList.add(Place(
                         document["country"].toString(),
                         document["place"].toString(),
                         document["description"].toString(),
                         document["imageUrl"].toString()
-                    )
-                    )
+                    ))
                 }
                 feed.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context)
-                    adapter = FeedAdapter(listTotal)
+                    adapter = FeedAdapter(feedList)
                 }
             }
             .addOnFailureListener {
