@@ -35,7 +35,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     private var buttonUploadImage: FloatingActionButton? = null
     private var buttonAddPlacesToVisit: FloatingActionButton? = null
     private var buttonAddPlacesVisited: FloatingActionButton? = null
-    private var descriptionText: EditText? = nulln
+    private var descriptionText: EditText? = null
     private var countryText: EditText? = null
     private var placeText: EditText? = null
 
