@@ -52,12 +52,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 Toast.makeText(context,"Error getting data", Toast.LENGTH_LONG).show()
             }
 
-        val countryList: ArrayList<String> = ArrayList()
         val storiesList: ArrayList<Place> = ArrayList()
         db.collection("PlaceToVisit").document("countryList").collection("list").get()
             .addOnSuccessListener { result ->
                 for (document in result){
-                    countryList.add(document["country"].toString())
                     storiesList.add(Place(
                         document["country"].toString(),
                         document["place"].toString(),
