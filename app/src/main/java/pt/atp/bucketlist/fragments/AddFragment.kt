@@ -8,7 +8,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -39,7 +38,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     private var countryText: EditText? = null
     private var placeText: EditText? = null
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val rootView: View = inflater.inflate(R.layout.fragment_add,container,false)
         buttonChooseImage = rootView.findViewById(R.id.buttonChooseImage)
         buttonUploadImage = rootView.findViewById(R.id.buttonUploadImage)
@@ -76,7 +75,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
             val uploadTask = ref?.putFile(filePath!!)
 
-            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+            uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                 if (!task.isSuccessful) {
                     task.exception?.let {
                         throw it
