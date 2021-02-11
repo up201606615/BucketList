@@ -28,4 +28,6 @@
     <string name="place">Place</string>
     <string name="upload_button">Upload Button</string>
     <string name="choose_button">Choose Button</string>
+    <string name="add_to_places_to_visit_list"><![CDATA[Add to places to visit list >>]]></string>
+    <string name="add_to_places_already_visited_list"><![CDATA[Add to places already visited list >>]]></string>
 </resources>
