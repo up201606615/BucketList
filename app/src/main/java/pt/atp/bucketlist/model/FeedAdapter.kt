@@ -22,6 +22,7 @@ class FeedAdapter internal constructor(private val places: List<Place>) : Recycl
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val feed = places[position]
         holder.userName.text = feed.place
+        holder.description.text = feed.description
         Picasso.get()
             .load(feed.picture)
             .error(R.drawable.error)
@@ -37,5 +38,6 @@ class FeedAdapter internal constructor(private val places: List<Place>) : Recycl
         val userImage = itemView.iv_user_image!!
         val userName = itemView.tv_user_name!!
         val image = itemView.iv_image!!
+        val description = itemView.tv_description!!
     }
 }
