@@ -42,20 +42,38 @@ class VisitedFragment: Fragment(R.layout.fragment_visited)  {
                     )
                     )
                 }
-                stories.apply {
-                    setHasFixedSize(true)
-                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = StoryAdapter(context, listTotal, listener)
-                }
-
                 feed.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context)
-                    adapter = FeedAdapter(context, listTotal)
+                    adapter = FeedAdapter(listTotal)
                 }
             }
             .addOnFailureListener {
                 Toast.makeText(context,"Error getting data", Toast.LENGTH_LONG).show()
+            }
+
+        val countryList: ArrayList<String> = ArrayList()
+        val storiesList: ArrayList<Place> = ArrayList()
+        db.collection("PlaceVisited").document("countryList").collection("list").get()
+            .addOnSuccessListener { result ->
+                for (document in result){
+                    countryList.add(document["country"].toString())
+                    storiesList.add(Place(
+                        document["country"].toString(),
+                        document["place"].toString(),
+                        document["description"].toString(),
+                        document["imageUrl"].toString()
+                    ))
+                }
+                stories.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = StoryAdapter(storiesList, listener)
+                }
+
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"Error getting country list",Toast.LENGTH_LONG).show()
             }
 
         return rootView

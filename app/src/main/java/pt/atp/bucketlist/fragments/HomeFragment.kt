@@ -45,7 +45,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 feed.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context)
-                    adapter = FeedAdapter(context, listTotal)
+                    adapter = FeedAdapter(listTotal)
                 }
             }
             .addOnFailureListener {
@@ -68,7 +68,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 stories.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = StoryAdapter(context, storiesList, listener)
+                    adapter = StoryAdapter(storiesList, listener)
                 }
 
             }

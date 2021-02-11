@@ -1,6 +1,5 @@
 package pt.atp.bucketlist.model
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_feed.view.*
 import pt.atp.bucketlist.R
 
-class FeedAdapter internal constructor(private val context: Context, private val places: List<Place>) : RecyclerView.Adapter<FeedAdapter.MainViewHolder?>() {
+class FeedAdapter internal constructor(private val places: List<Place>) : RecyclerView.Adapter<FeedAdapter.MainViewHolder?>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,11 +22,11 @@ class FeedAdapter internal constructor(private val context: Context, private val
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val feed = places[position]
         holder.userName.text = feed.place
-        Picasso.with(context)
+        Picasso.get()
             .load(feed.picture)
             .error(R.drawable.error)
             .into(holder.image)
-        Picasso.with(context)
+        Picasso.get()
             .load(feed.picture)
             .error(R.drawable.error)
             .into(holder.userImage)

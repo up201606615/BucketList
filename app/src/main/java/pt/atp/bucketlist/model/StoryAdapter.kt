@@ -1,17 +1,19 @@
 package pt.atp.bucketlist.model
 
-import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.os.Build
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_story.view.*
 import pt.atp.bucketlist.R
 
 
-class StoryAdapter internal constructor(private val context: Context, private val places: List<Place>, private var listener: OnItemClickListener) : RecyclerView.Adapter<StoryAdapter.MainViewHolder?>() {
+class StoryAdapter internal constructor(
+    private val places: List<Place>,
+    private var listener: OnItemClickListener
+) : RecyclerView.Adapter<StoryAdapter.MainViewHolder?>() {
 
     interface OnItemClickListener {
         fun onItemClick(story: Place)
@@ -30,7 +32,7 @@ class StoryAdapter internal constructor(private val context: Context, private va
         val feed = places[position]
         holder.userName.text = feed.country.split(" ")[0]
 
-        Picasso.with(context)
+        Picasso.get()
             .load(feed.picture)
             .error(R.drawable.error)
             .into(holder.userImage)
