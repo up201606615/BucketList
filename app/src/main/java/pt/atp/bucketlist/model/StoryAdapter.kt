@@ -32,10 +32,7 @@ class StoryAdapter internal constructor(
         val feed = places[position]
         holder.userName.text = feed.country.split(" ")[0]
 
-        Picasso.get()
-            .load(feed.picture)
-            .error(R.drawable.error)
-            .into(holder.userImage)
+        holder.userImage.setImageResource(feed.picture)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.userImage.clipToOutline = true
         }

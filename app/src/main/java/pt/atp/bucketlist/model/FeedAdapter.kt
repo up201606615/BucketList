@@ -23,15 +23,8 @@ class FeedAdapter internal constructor(private val places: List<Place>) : Recycl
         val feed = places[position]
         holder.userName.text = feed.place
         holder.description.text = feed.description
-        Picasso.get()
-            .load(feed.picture)
-            .error(R.drawable.error)
-            .into(holder.image)
-        Picasso.get()
-            .load(feed.picture)
-            .error(R.drawable.error)
-            .into(holder.userImage)
-
+        holder.image.setImageResource(feed.picture)
+        holder.userImage.setImageResource(feed.picture)
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

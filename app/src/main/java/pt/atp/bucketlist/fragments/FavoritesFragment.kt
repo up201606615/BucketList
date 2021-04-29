@@ -9,7 +9,7 @@ import pt.atp.bucketlist.R
 
 class FavoritesFragment: Fragment(R.layout.fragment_favorites)  {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val rootView: View = inflater.inflate(R.layout.fragment_favorites,container,false)
         return rootView
     }
