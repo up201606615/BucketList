@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pt.atp.bucketlist.R
+import pt.atp.bucketlist.model.Country
 import pt.atp.bucketlist.model.FeedAdapter
-import pt.atp.bucketlist.model.Place
 import pt.atp.bucketlist.model.StoryAdapter
 import pt.atp.bucketlist.objects.Places
 
 class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private var listener = object : StoryAdapter.OnItemClickListener{
-        override fun onItemClick(story: Place) {
+        override fun onItemClick(story: Country) {
             Toast.makeText(context,"Clicked",Toast.LENGTH_LONG).show()
         }
     }
@@ -30,13 +30,13 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         stories.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = StoryAdapter(Places.placesVisited, listener)
+            adapter = StoryAdapter(Places.countriesToVisit, listener)
         }
 
         feed.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = FeedAdapter(Places.placesVisited)
+            adapter = FeedAdapter(Places.placesToVisit)
         }
 
         return rootView

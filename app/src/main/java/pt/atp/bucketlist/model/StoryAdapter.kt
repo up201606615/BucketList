@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_story.view.*
 import pt.atp.bucketlist.R
 
 
 class StoryAdapter internal constructor(
-    private val places: List<Place>,
+    private val places: List<Country>,
     private var listener: OnItemClickListener
 ) : RecyclerView.Adapter<StoryAdapter.MainViewHolder?>() {
 
     interface OnItemClickListener {
-        fun onItemClick(story: Place)
+        fun onItemClick(story: Country)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -44,7 +43,7 @@ class StoryAdapter internal constructor(
         val userImage = itemView.iv_user_image!!
         val userName = itemView.tv_user_name!!
 
-        fun bindView(story: Place, listener: OnItemClickListener){
+        fun bindView(story: Country, listener: OnItemClickListener){
             itemView.setOnClickListener{listener.onItemClick(story)}
         }
     }

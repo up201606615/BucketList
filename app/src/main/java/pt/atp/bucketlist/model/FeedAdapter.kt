@@ -21,10 +21,10 @@ class FeedAdapter internal constructor(private val places: List<Place>) : Recycl
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val feed = places[position]
-        holder.userName.text = feed.place
+        holder.userName.text = (feed.place).plus(", ").plus(feed.country)
         holder.description.text = feed.description
         holder.image.setImageResource(feed.picture)
-        holder.userImage.setImageResource(feed.picture)
+        holder.userImage.setImageResource(feed.pictureCountry)
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
