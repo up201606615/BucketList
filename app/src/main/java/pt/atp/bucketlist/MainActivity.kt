@@ -45,13 +45,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_photo -> {
-                //Toast.makeText(applicationContext, "click on photo", Toast.LENGTH_LONG).show()
-                val intent = Intent(applicationContext, ActivityMaps::class.java)
-                startActivity(intent)
-                true
+                Toast.makeText(applicationContext, "click on photo", Toast.LENGTH_LONG).show()
+                return true
             }
             R.id.action_live ->{
-                Toast.makeText(applicationContext, "click on live", Toast.LENGTH_LONG).show()
+                val intent = Intent(applicationContext, ActivityMaps::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.action_chat ->{

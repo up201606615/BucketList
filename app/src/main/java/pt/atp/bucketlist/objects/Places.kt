@@ -7,7 +7,7 @@ import pt.atp.bucketlist.model.Place
 object Places {
 
     val placesToVisit = listOf(
-            Place("Ireland", "Raod Trip" , "",  R.drawable.irelandtrip, R.drawable.ireland),
+            Place("Ireland", "Road Trip" , "",  R.drawable.irelandtrip, R.drawable.ireland),
             Place("Scotland", "North Coast 500", "", R.drawable.northcoast, R.drawable.scotland),
             Place("Chile", "Patagonia", "", R.drawable.patagonia, R.drawable.chile),
             Place("Norway", "Road Trip", "", R.drawable.norwaytrip, R.drawable.norway),
